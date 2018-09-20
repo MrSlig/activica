@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sligx
- * Date: 9/19/2018
- * Time: 12:01 PM
- */
 
 use Activica\YMLParser\Parser;
 
@@ -50,7 +44,6 @@ function getGoods($file) {
         . $shop->getName()
         . '_offers '
         . '(id int NOT NULL PRIMARY KEY auto_increment, '
-        . 'offer_id int(4), '
         . 'available bit, '
         . 'url varchar(50), '
         . 'price int(7), '
@@ -58,14 +51,14 @@ function getGoods($file) {
         . 'category_id int(4), '
         . 'picture varchar(50), '
         . 'name varchar(50), '
-        . 'articul int(7), '
+        . 'articul varchar(50), '
         . 'vendor varchar(50), '
         . 'description varchar(50), '
         . 'season varchar(50), '
-        . 'ext_name varchar(50), '
-        . 'status_new bit, '
-        . 'status_action bit, '
-        . 'status_top bit);'
+        . 'model varchar(50), '
+        . 'new bit, '
+        . 'action bit, '
+        . 'top bit);'
     );
     $stmt->execute();
 
@@ -74,57 +67,60 @@ function getGoods($file) {
             . 'INSERT INTO '
             . $shop->getName()
             . '_offers '
-            . '(offer_id,
-                 available,
-                 url,
-                 price,
-                 opt_price,
-                 category_id,
-                 picture,
-                 name,
-                 articul,
-                 vendor,
-                 description,
-                 season,
-                 ext_name,
-                 status_new,
-                 status_action,
-                 status_top) '
-            . 'VALUES(:offer_id,
-                 :available,
-                 :url,
-                 :price,
-                 :opt_price,
-                 :category_id,
-                 :picture,
-                 :name,
-                 :articul,
-                 :vendor,
-                 :description,
-                 :season,
-                 :ext_name,
-                 :status_new,
-                 :status_action,
-                 :status_top);'
+            . '(available,'
+            . 'url, '
+            . 'price, '
+            . 'opt_price, '
+            . 'category_id, '
+            . 'picture, '
+            . 'name, '
+            . 'articul, '
+            . 'vendor, '
+            . 'description, '
+            . 'season, '
+            . 'model, '
+            . 'new, '
+            . 'action, '
+            . 'top) '
+            . 'VALUES '
+            . '(:available, '
+            . ':url, '
+            . ':price, '
+            . ':opt_price, '
+            . ':category_id, '
+            . ':picture, '
+            . ':name, '
+            . ':articul, '
+            . ':vendor, '
+            . ':description, '
+            . ':season, '
+            . ':model, '
+            . ':new, '
+            . ':action, '
+            . ':top);'
         );
-        $stmt->bindValue(':offer_id', $offer->getId(), PDO::PARAM_INT);
-        $stmt->bindValue(':available',$offer->isAvailable(), PDO::PARAM_INT);
+        $stmt->bindValue(':available',$offer->isAvailable(), PDO::PARAM_BOOL);
         $stmt->bindValue(':url', $offer->getUrl(), PDO::PARAM_STR);
         $stmt->bindValue(':price', $offer->getPrice(), PDO::PARAM_INT);
-        $stmt->bindValue(':opt_price', 999, PDO::PARAM_INT);
-        $stmt->bindValue(':category_id', 999, PDO::PARAM_INT);
+        $stmt->bindValue(':opt_price', $offer->getOptPrice(), PDO::PARAM_INT);
+        $stmt->bindValue(':category_id', $offer->getCategoryId(), PDO::PARAM_INT);
         $stmt->bindValue(':picture', $offer->getPictures()[0], PDO::PARAM_STR);
         $stmt->bindValue(':name', $offer->getName(), PDO::PARAM_STR);
-        $stmt->bindValue(':articul', 999, PDO::PARAM_INT);
-        $stmt->bindValue(':vendor', 'VENDOR', PDO::PARAM_STR);
-        $stmt->bindValue(':description', mb_convert_encoding((string)$offer->getDescription(),
-            "UTF-8", "windows-1251"), PDO::PARAM_STR);
-        $stmt->bindValue(':season', 'SEASON', PDO::PARAM_STR);
-        $stmt->bindValue(':ext_name', $offer->getName(), PDO::PARAM_STR);
-        $stmt->bindValue(':status_new', 0, PDO::PARAM_INT);
-        $stmt->bindValue(':status_action', 0, PDO::PARAM_INT);
-        $stmt->bindValue(':status_top', 0, PDO::PARAM_INT);
+        $stmt->bindValue(':articul', $offer->getArticul(), PDO::PARAM_STR);
+        $stmt->bindValue(':vendor', $offer->getVendor(), PDO::PARAM_STR);
+        $stmt->bindValue(':description', $a = iconv('cp1251//IGNORE', 'utf-8//IGNORE',
+            (string)$offer->getDescription()), PDO::PARAM_STR); //NOT WORKING CORRECTLY
+        $stmt->bindValue(':season', $offer->getSeason(), PDO::PARAM_STR);
+        $stmt->bindValue(':model', $offer->getModel(), PDO::PARAM_STR);
+        $stmt->bindValue(':new', $offer->isNew(), PDO::PARAM_BOOL);
+        $stmt->bindValue(':action', $offer->isAction(), PDO::PARAM_BOOL);
+        $stmt->bindValue(':top', $offer->isTop(), PDO::PARAM_BOOL);
         $stmt->execute();
+
+        //-------------IT'S NOT WORKING TOO:-----------------------------
+        // iconv('windows-1251', 'UTF-8', (string)$offer->getDescription())
+        // mb_convert_encoding((string)$offer->getDescription(), "UTF-8", "windows-1251")
+        // $text = iconv('cp1251//IGNORE', 'utf-8//IGNORE', $text);
     }
     return $shop->getCategories();
 }

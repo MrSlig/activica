@@ -1,5 +1,7 @@
 <?php
 
+//useless?
+
 namespace Activica\YMLParser\Offer;
 
 class VendorModelOffer extends Offer

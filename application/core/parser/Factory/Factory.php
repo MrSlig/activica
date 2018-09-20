@@ -4,7 +4,6 @@ namespace Activica\YMLParser\Factory;
 
 use Activica\YMLParser\Category;
 use Activica\YMLParser\Currency;
-use Activica\YMLParser\Offer\BookOffer;
 use Activica\YMLParser\Offer\Offer;
 use Activica\YMLParser\Offer\VendorModelOffer;
 use Activica\YMLParser\Param;
@@ -36,8 +35,6 @@ class Factory
         switch ($type) {
             case 'vendor.model':
                 return new VendorModelOffer();
-            case 'book':
-                return new BookOffer();
             default:
                 return new Offer();
         }

@@ -15,12 +15,23 @@ class Offer
     protected $id;
 
     /**
+     * @var integer|string
+     */
+    protected $categoryId;
+
+    /**
+     * @var integer|string
+     */
+    protected $articul;
+
+    /**
      * @var string
      */
     protected $type;
 
-    protected $name = '';
-    protected $description = '';
+    protected $name         = '';
+
+    protected $description  = '';
 
     /**
      * Доступность товара
@@ -29,14 +40,27 @@ class Offer
      *
      * @var bool
      */
-    protected $available = true;
+    protected $available    = true;
 
-    protected $url = '';
+    protected $new          = true;
 
-    protected $price = 0;
+    protected $action       = true;
+
+    protected $top          = true;
+
+    protected $url      = '';
+
+    protected $vendor   = '';
+
+    protected $model    = '';
+
+    protected $season   = '';
+
+    protected $price    = 0;
 
     protected $oldPrice = 0;
 
+    protected $optprice =0;
     /**
      * @var Currency
      */
@@ -45,7 +69,7 @@ class Offer
     /**
      * @var Category
      */
-    protected $category;
+    protected $category;    //currently integer, but who knows?
 
     /**
      * @var Shop
@@ -54,9 +78,9 @@ class Offer
 
     protected $typePrefix;
 
-    protected $pictures = [];
+    protected $pictures     = [];
 
-    protected $attributes = [];
+    protected $attributes   = [];
 
     /**
      * @var \SimpleXMLElement
@@ -76,6 +100,28 @@ class Offer
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
+        return $this;
+    }
+
+    public function getArticul()
+    {
+        return $this->articul;
+    }
+
+    public function setArticul($articul)
+    {
+        $this->articul = $articul;
         return $this;
     }
 
@@ -123,6 +169,39 @@ class Offer
         return $this;
     }
 
+    public function isNew()
+    {
+        return $this->new;
+    }
+
+    public function setNew($new)
+    {
+        $this->$new = (bool)$new;
+        return $this;
+    }
+
+    public function isAction()
+    {
+        return $this->action;
+    }
+
+    public function setAction($action)
+    {
+        $this->action = (bool)$action;
+        return $this;
+    }
+
+    public function isTop()
+    {
+        return $this->top;
+    }
+
+    public function setTop($top)
+    {
+        $this->top = (bool)$top;
+        return $this;
+    }
+
     public function getUrl()
     {
         return $this->url;
@@ -131,6 +210,39 @@ class Offer
     public function setUrl($url)
     {
         $this->url = (string)$url;
+        return $this;
+    }
+
+    public function getVendor()
+    {
+        return $this->vendor;
+    }
+
+    public function setVendor($vendor)
+    {
+        $this->vendor = (string)$vendor;
+        return $this;
+    }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    public function setModel($model)
+    {
+        $this->model = (string)$model;
+        return $this;
+    }
+
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    public function setSeason($season)
+    {
+        $this->season = (string)$season;
         return $this;
     }
 
@@ -293,6 +405,18 @@ class Offer
     public function setOldPrice($oldPrice)
     {
         $this->oldPrice = $oldPrice;
+
+        return $this;
+    }
+
+    public function getOptPrice()
+    {
+        return $this->optprice;
+    }
+
+    public function setOptPrice($optprice)
+    {
+        $this->optprice = $optprice;
 
         return $this;
     }

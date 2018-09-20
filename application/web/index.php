@@ -6,7 +6,6 @@ session_start();
 $router     =   new Router();
 $content    =   $router->run();
 
-
 if (is_string($content)) {
     require VIEW_PATH . 'include/content.php';
 } else {

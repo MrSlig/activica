@@ -1,6 +1,7 @@
 <?php
 /**  @var $post Post */
-?>  //^важный момент
+?>
+
 <?php if ($post): ?>
     <div>
         <h1 id="title_post"><?php echo $post->title ?></h1>

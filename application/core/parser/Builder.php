@@ -164,7 +164,12 @@ class Builder
 
         $offer
             ->setId((string)$xml['id'])
+            ->setSeason(((string)$xml['season']))
+            ->setModel(((string)$xml['name']))
             ->setAvailable(((string)$xml['available']) == 'true' ? true : false)
+            ->setNew(((string)$xml['statusNew']) == 'true' ? true : false)
+            ->setAction(((string)$xml['statusAction']) == 'true' ? true : false)
+            ->setTop(((string)$xml['statusTop']) == 'true' ? true : false)
             ->setType($type)
             ->setXml($xml)
         ;
