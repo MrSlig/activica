@@ -4,7 +4,6 @@ require_once __DIR__ . '/constants.php';
 
 require_once __DIR__ . '/DB.php';
 require_once __DIR__ . '/router/Router.php';
-require_once __DIR__ . '/parser.php';
 require_once __DIR__ . '/controller/DefaultController.php';
 
 require_once __DIR__ . '/parser/Parser.php';

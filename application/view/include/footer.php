@@ -1,14 +1,21 @@
 <div class="footer">
         <br/>
             <div>
-            	<a href="enter.php">Войти</a>
-            	<a href="registration.php">Регистрация</a>
-                <a href="index.php">Лента</a>
-                <a href="add_post.php">Добавить запись</a>
-                <a href="about.php">О проекте</a>
-                <a href="support.php">Поддержать проект</a>
-                <a href="press.php">Пресса</a>
-                <a href="index.php".html">Условия</a></div>
+                <h5>ЗАГРУЗКА НОВОГО ФАЙЛА:</h5>
+                <form enctype="multipart/form-data" method="post" action="index.php?action=parser">
+                    <p>
+                        <input type="file" name="XML">
+                        <input type="submit" value="Отправить">
+                    </p>
+                </form>
+            </div>            <div>
+                <h5>СБРОС ТАБЛИЦЫ ДАННЫХ:</h5>
+                <form method="post" action="index.php?action=erase">
+                    <p>
+                        <input type="submit" value="СБРОСИТЬ!">
+                    </p>
+                </form>
+            </div>
     </div>
 </body>
 </html>
